@@ -5,10 +5,10 @@ description: Hub Reboot Plugin
 
 
 commands:
-  hubsettime: sets the restart time
+  hubsettime:
   
-  hubtime2: test command
+  hubtime2:
 
-  hubtime: shows the configured restart time
+  hubtime:
  
-  hubreload: reloads the configuration file
+  hubreload:
