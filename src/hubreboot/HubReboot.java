@@ -19,11 +19,6 @@ public class HubReboot extends JavaPlugin{
     FileConfiguration config;
     File cfile;
        
-         
-    long thour = (20 * 60 * 60 * config.getLong("hour"));
-    long tminutes = (20 * 60 * config.getLong("minute"));
-    long tseconds = ( 20 * config.getLong("seconds"));
-    long time2 = (thour + tminutes + tseconds);       
    @Override
     public void onEnable(){
        
@@ -77,6 +72,10 @@ public class HubReboot extends JavaPlugin{
             }
          
          if(cmd.getName().equalsIgnoreCase("hubtime2")){
+            long thour = (20 * 60 * 60 * config.getLong("hour"));
+            long tminutes = (20 * 60 * config.getLong("minute"));
+            long tseconds = ( 20 * config.getLong("seconds"));
+            long time2 = (thour + tminutes + tseconds);
              sender.sendMessage(ChatColor.YELLOW + "TESTING NEW TIME: " + time2 );
              return true;
          }
