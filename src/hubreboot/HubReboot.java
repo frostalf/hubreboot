@@ -17,8 +17,13 @@ import org.bukkit.plugin.SimplePluginManager;
        
 public class HubReboot extends JavaPlugin{
     FileConfiguration config;
-    File cfile;  
+    File cfile;
+       
          
+    long thour = (20 * 60 * 60 * config.getLong("hour"));
+    long tminutes = (20 * 60 * config.getLong("minute"));
+    long tseconds = ( 20 * config.getLong("seconds"));
+    long time2 = (thour + tminutes + tseconds);       
    @Override
     public void onEnable(){
        
@@ -27,11 +32,7 @@ public class HubReboot extends JavaPlugin{
        saveConfig();
        cfile = new File(getDataFolder(), "config.yml");
        
-       long thour = (20 * 60 * 60 * config.getLong("hour"));
-       long tminutes = (20 * 60 * config.getLong("minute"));
-       long tseconds = (20 * config.getLong("seconds"));
-       
-        Bukkit.getServer().getScheduler().runTaskLater(this, new Runnable() {
+       Bukkit.getServer().getScheduler().runTaskLater(this, new Runnable() {
             @Override
             public void run() {
                 Bukkit.getServer().shutdown();
@@ -52,17 +53,18 @@ public class HubReboot extends JavaPlugin{
                 sender.sendMessage(ChatColor.RED + "You didn't specify a time!");
                 return true;
             }
-            if(args.length > 1) {
+            if(args.length > 3) {
                 sender.sendMessage(ChatColor.RED + "Too many arguments!");
                 return true;
             }
-            if(args.length == 1){
-            Long displaytime = Long.valueOf(args[0]);
-            getConfig().set("time", displaytime);
-            saveConfig();
-            reloadConfig();
-            config = YamlConfiguration.loadConfiguration(cfile);
-            sender.sendMessage(ChatColor.GREEN + "Time Set To: " + displaytime);
+            if(args.length == 3){
+            
+                Long displaytime = Long.valueOf(args[0]);
+                getConfig().set("time", displaytime);
+                saveConfig();
+                reloadConfig();
+                config = YamlConfiguration.loadConfiguration(cfile);
+                sender.sendMessage(ChatColor.GREEN + "Time Set To: " + displaytime);
             return true;
             }                        
         }
@@ -73,6 +75,11 @@ public class HubReboot extends JavaPlugin{
              sender.sendMessage(ChatColor.GREEN + "Configured time: " + displaytime);
              return true;
             }
+         
+         if(cmd.getName().equalsIgnoreCase("hubtime2")){
+             sender.sendMessage(ChatColor.YELLOW + "TESTING NEW TIME: " + time2 );
+             return true;
+         }
     return true;    
     }
 }
