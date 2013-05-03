@@ -1,0 +1,12 @@
+name: HubReboot
+version: 2.0
+main: hubreboot.HubReboot
+description: Hub Reboot Plugin
+
+
+commands:
+  hubsettime:
+
+  hubtime:
+ 
+  hubreload:
