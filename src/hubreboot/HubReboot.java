@@ -61,18 +61,21 @@ public class HubReboot extends JavaPlugin{
                 return true;
             }
             if(args.length == 3){
-                
+                long hour = Long.valueOf(args[0]);
+                long minute = Long.valueOf(args[1]);
+                long second = Long.valueOf(args[2]);
                 long thour2 = (thour * Long.valueOf(args[0]));
                 long tminutes2 = (tminutes * Long.valueOf(args[1]));
                 long tseconds2 = (tseconds * Long.valueOf(args[2]));
                 Long displaytime = (thour2 + tminutes2 + tseconds2);
-                getConfig().set("hours", thour2);
-                getConfig().set("minutes", tminutes2);
-                getConfig().set("seconds", tseconds2);
+                getConfig().set("hours", hour);
+                getConfig().set("minutes", minute);
+                getConfig().set("seconds", second);
                 saveConfig();
                 reloadConfig();
+                
                 config = YamlConfiguration.loadConfiguration(cfile);
-                sender.sendMessage(ChatColor.GREEN + "Time Set To: " + ChatColor.BLUE + "Hours: " + thour2 + " Minutes: " + tminutes2 + " Seconds: " + tseconds2 + " OR " + displaytime + " Ticks");
+                sender.sendMessage(ChatColor.GREEN + "Time Set To: " + ChatColor.BLUE + "Hours: " + hour + " Minutes: " + minute + " Seconds: " + second + " OR " + displaytime + " Ticks");
             return true;
             }                        
         }
@@ -81,7 +84,7 @@ public class HubReboot extends JavaPlugin{
              long hours = getConfig().getLong("hours");
              long minutes = getConfig().getLong("minutes");
              long seconds = getConfig().getLong("seconds");
-             long displaytime = (hours + minutes + seconds);
+             long displaytime = ((20 * 60 *60 * hours) + (20 *60 * minutes) + (20 * seconds));
              sender.sendMessage(ChatColor.GREEN + "Configured time: Hours: " + hours + " Minutes: " + minutes + " Seconds: " + seconds + " OR " + displaytime + " ticks");
              return true;
             }
