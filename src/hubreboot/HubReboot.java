@@ -82,7 +82,7 @@ public class HubReboot extends JavaPlugin{
                 reloadConfig();
                 
                 config = YamlConfiguration.loadConfiguration(cfile);
-                sender.sendMessage(ChatColor.GREEN + "Time Set To: " + ChatColor.BLUE + "Hours: " + hour + " Minutes: " + minute + " Seconds: " + second + " OR " + displaytime + " Ticks");
+                sender.sendMessage(ChatColor.GREEN + "Time Set To: " + ChatColor.BLUE + hour + " Hours " + minute + " Minutes " + second + " Seconds OR " + displaytime + " Ticks");
                 sender.sendMessage(ChatColor.RED + "Please type /hubreload to apply changes");
             return true;
             }                        
@@ -97,7 +97,7 @@ public class HubReboot extends JavaPlugin{
              long minutes = getConfig().getLong("minutes");
              long seconds = getConfig().getLong("seconds");
              long displaytime = ((20 * 60 *60 * hours) + (20 *60 * minutes) + (20 * seconds));
-             sender.sendMessage(ChatColor.GREEN + "Configured time: Hours: " + hours + " Minutes: " + minutes + " Seconds: " + seconds + " OR " + displaytime + " ticks");
+             sender.sendMessage(ChatColor.GREEN + "Configured time: " + ChatColor.BLUE + hours + " Hours " + minutes + " Minutes " + seconds + " Seconds OR " + displaytime + " ticks");
              return true;
             }
          return true;
