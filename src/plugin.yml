@@ -14,7 +14,7 @@ commands:
     description: views the time set in config
  
   hubreload:
-    usage: /hubreload (takes no arguments
+    usage: /hubreload (takes no arguments)
     description: reloads the config to apply changes made using /hubsettime
     
 permissions:

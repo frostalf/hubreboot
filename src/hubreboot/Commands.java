@@ -20,8 +20,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
  */
 public class Commands extends JavaPlugin implements CommandExecutor {
 
-    Commands(HubReboot aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private HubReboot plugin;
+    public Commands(HubReboot plugin) {
+        this.plugin = plugin;
     }
 
     @Override    
@@ -92,7 +93,6 @@ public class Commands extends JavaPlugin implements CommandExecutor {
              sender.sendMessage(ChatColor.GREEN + "Configured time: " + ChatColor.BLUE + hours + " Hours " + minutes + " Minutes " + seconds + " Seconds OR " + displaytime + " ticks");
              return true;
             }
-         return false;
+         return true;
     }
-    
 }
