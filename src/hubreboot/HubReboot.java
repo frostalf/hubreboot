@@ -12,7 +12,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.SimplePluginManager;
 
        
 public class HubReboot extends JavaPlugin{
@@ -39,6 +38,10 @@ public class HubReboot extends JavaPlugin{
    
     @Override    
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
+        if(!sender.hasPermission("hubreboot.reload")){
+                sender.sendMessage(ChatColor.RED + "You Don't have access to this command!");
+                return true;
+            }
             long thour = (20 * 60 * 60);
             long tminutes = (20 * 60);
             long tseconds = (20);
@@ -48,6 +51,10 @@ public class HubReboot extends JavaPlugin{
         }
         
         if(cmd.getName().equalsIgnoreCase("hubsettime")) {
+            if(!sender.hasPermission("hubreboot.set")){
+                sender.sendMessage(ChatColor.RED + "You Don't have access to this command!");
+                return true;
+            }
             if(args.length == 0) {
                 sender.sendMessage(ChatColor.RED + "You didn't specify a time! Need 3 arguments(hours, minutes, seconds)");
                 return true;
@@ -76,11 +83,16 @@ public class HubReboot extends JavaPlugin{
                 
                 config = YamlConfiguration.loadConfiguration(cfile);
                 sender.sendMessage(ChatColor.GREEN + "Time Set To: " + ChatColor.BLUE + "Hours: " + hour + " Minutes: " + minute + " Seconds: " + second + " OR " + displaytime + " Ticks");
+                sender.sendMessage(ChatColor.RED + "Please type /hubreload to apply changes");
             return true;
             }                        
         }
         
-         if(cmd.getName().equalsIgnoreCase("hubtime")) {
+            if(cmd.getName().equalsIgnoreCase("hubtime")) {
+                if(!sender.hasPermission("hubreboot.view")){
+                sender.sendMessage(ChatColor.RED + "You Don't have access to this command!");
+                return true;
+            }
              long hours = getConfig().getLong("hours");
              long minutes = getConfig().getLong("minutes");
              long seconds = getConfig().getLong("seconds");
@@ -88,6 +100,6 @@ public class HubReboot extends JavaPlugin{
              sender.sendMessage(ChatColor.GREEN + "Configured time: Hours: " + hours + " Minutes: " + minutes + " Seconds: " + seconds + " OR " + displaytime + " ticks");
              return true;
             }
-    return true;    
+         return true;
     }
 }

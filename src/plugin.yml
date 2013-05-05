@@ -6,9 +6,26 @@ description: Hub Reboot Plugin
 
 commands:
   hubsettime:
-  
-  hubtime2:
+    usage: /hubsettime (hour) (minutes) (seconds)
+    description: set the restart time
 
   hubtime:
+    usage: /hubtime  (takes no arguments)
+    description: views the time set in config
  
   hubreload:
+    usage: /hubreload (takes no arguments
+    description: reloads the config to apply changes made using /hubsettime
+    
+permissions:
+  hubreboot.set:
+    description: permission to use the command to set the time
+    default: op
+  
+  hubreboot.view:
+    description: permission to view the time set in config
+    default: op
+  
+  hubreboot.reload:
+    description: permission to reload the config or to apply changes made to config.
+    default: op
