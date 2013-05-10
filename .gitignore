@@ -1,3 +1,7 @@
 dist/
 build/
+nbproject/
+build.xml
+manifest.mf
+README.md
 .gitignore
