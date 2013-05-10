@@ -5,6 +5,7 @@
 package hubreboot;
 
 import java.io.File;
+import java.text.MessageFormat;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -40,7 +41,7 @@ public class HubReboot extends JavaPlugin{
    @Override 
    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
         if(!sender.hasPermission("hubreboot.reload")){
-                sender.sendMessage(ChatColor.RED + "You Don't have access to this command!");
+                sender.sendMessage(MessageFormat.format("{0}You Don't have access to this command!", ChatColor.RED));
                 return true;
             }
             long thour = (20 * 60 * 60);
@@ -48,24 +49,24 @@ public class HubReboot extends JavaPlugin{
             long tseconds = (20);
         if (cmd.getName().equalsIgnoreCase("hubreload")) {
             config = YamlConfiguration.loadConfiguration(cfile);
-            sender.sendMessage(ChatColor.GREEN + "Reloaded Hub Restart Config!");
+            sender.sendMessage(MessageFormat.format("{0}Reloaded Hub Restart Config!", ChatColor.GREEN));
         }
         
         if(cmd.getName().equalsIgnoreCase("hubsettime")) {
             if(!sender.hasPermission("hubreboot.set")){
-                sender.sendMessage(ChatColor.RED + "You Don't have access to this command!");
+                sender.sendMessage(MessageFormat.format("{0}You Don't have access to this command!", ChatColor.RED));
                 return true;
             }
             if(args.length == 0) {
-                sender.sendMessage(ChatColor.RED + "You didn't specify a time! Need 3 arguments(hours, minutes, seconds)");
+                sender.sendMessage(MessageFormat.format("{0}You didn't specify a time! Need 3 arguments(hours, minutes, seconds)", ChatColor.RED));
                 return true;
             }
             if(args.length > 3) {
-                sender.sendMessage(ChatColor.RED + "Too many arguments! Only need 3(hours, minutes, seconds)");
+                sender.sendMessage(MessageFormat.format("{0}Too many arguments! Only need 3(hours, minutes, seconds)", ChatColor.RED));
                 return true;
             }
             if((args.length > 0 ) && (args.length < 3)){
-                sender.sendMessage(ChatColor.RED + "Too few arguements! Need 3 arguments(hours, minutes, seconds");
+                sender.sendMessage(MessageFormat.format("{0}Too few arguements! Need 3 arguments(hours, minutes, seconds", ChatColor.RED));
                 return true;
             }
             if(args.length == 3){
@@ -83,22 +84,22 @@ public class HubReboot extends JavaPlugin{
                 reloadConfig();
                 
                 config = YamlConfiguration.loadConfiguration(cfile);
-                sender.sendMessage(ChatColor.GREEN + "Time Set To: " + ChatColor.BLUE + hour + " Hours " + minute + " Minutes " + second + " Seconds OR " + displaytime + " Ticks");
-                sender.sendMessage(ChatColor.RED + "Please type /hubreload to apply changes");
+                sender.sendMessage(MessageFormat.format("{0}Time Set To: {1}{2} Hours {3} Minutes {4} Seconds OR {5} Ticks", ChatColor.GREEN, ChatColor.BLUE, hour, minute, second, displaytime));
+                sender.sendMessage(MessageFormat.format("{0}Please type /hubreload to apply changes", ChatColor.RED));
             return true;
             }                        
         }
         
             if(cmd.getName().equalsIgnoreCase("hubtime")) {
                 if(!sender.hasPermission("hubreboot.view")){
-                sender.sendMessage(ChatColor.RED + "You Don't have access to this command!");
+                sender.sendMessage(MessageFormat.format("{0}You Don't have access to this command!", ChatColor.RED));
                 return true;
             }
              long hours = getConfig().getLong("hours");
              long minutes = getConfig().getLong("minutes");
              long seconds = getConfig().getLong("seconds");
              long displaytime = ((20 * 60 *60 * hours) + (20 *60 * minutes) + (20 * seconds));
-             sender.sendMessage(ChatColor.GREEN + "Configured time: " + ChatColor.BLUE + hours + " Hours " + minutes + " Minutes " + seconds + " Seconds OR " + displaytime + " ticks");
+             sender.sendMessage(MessageFormat.format("{0}Configured time: {1}{2} Hours {3} Minutes {4} Seconds OR {5} ticks", ChatColor.GREEN, ChatColor.BLUE, hours, minutes, seconds, displaytime));
              return true;
             }
          return true;
